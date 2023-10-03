@@ -1,10 +1,14 @@
+{% load static %}
+{% load mediapath %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ЭлектроТех - Ваш путь к современным технологиям</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Подключите ваш файл стилей, если есть -->
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
     <header>
@@ -32,8 +36,34 @@
         </ul>
     </section>
 
+    <section id="products">
+        <h2>Товары</h2>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if product.image %}
+                            <img src="{% mediapath product.image %}" class="card-img-top" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="{% mediapath 'no_foto.jpg' %}" class="card-img-top" alt="No Photo">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description | truncatechars:100 }}</p>
+                            <p class="card-price">${{ product.price }}</p>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2023 ЭлектроТех</p>
     </footer>
+
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

@@ -1,13 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - ЭлектроТех</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Подключите ваш файл стилей, если есть -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
+<div class="container mt-5">
     <header>
+        <a href="/" class="btn btn-outline-primary">На главную</a>
         <h1>Контакты</h1>
         <p>Свяжитесь с нами</p>
     </header>
@@ -41,5 +44,8 @@
     <footer>
         <p>&copy; 2023 ЭлектроТех</p>
     </footer>
+</div>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
