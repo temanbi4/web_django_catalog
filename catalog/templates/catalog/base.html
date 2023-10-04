@@ -1,0 +1,47 @@
+{% load static %}
+{% load mediapath %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ЭлектроТех - Ваш путь к современным технологиям{% endblock %}</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать в магазин "ЭлектроТех"</h1>
+        <p>Ваш путь к современным технологиям</p>
+    </header>
+
+    <section id="advantages">
+        <h2>Плюсы покупки у нас</h2>
+        <ul>
+            <li>Широкий выбор электроники и аксессуаров</li>
+            <li>Высокое качество продукции</li>
+            <li>Доступные цены и акции</li>
+            <li>Профессиональные консультации</li>
+            <li>Быстрая доставка и гарантия</li>
+        </ul>
+    </section>
+
+    <section id="categories">
+        <h2>Категории товаров</h2>
+        <ul>
+            <li><a href="/telegram-bot">Телеграм бот</a></li>
+            <li><a href="/useful">Полезное</a></li>
+            <li><a href="/contact">Контакты</a></li>
+        </ul>
+    </section>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <p>&copy; 2023 ЭлектроТех</p>
+    </footer>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

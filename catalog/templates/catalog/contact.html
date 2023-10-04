@@ -1,13 +1,9 @@
+{% extends "catalog/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты - ЭлектроТех</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-</head>
-<body>
+{% load mediapath %}
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
 <div class="container mt-5">
     <header>
         <a href="/" class="btn btn-outline-primary">На главную</a>
@@ -45,7 +41,4 @@
         <p>&copy; 2023 ЭлектроТех</p>
     </footer>
 </div>
-
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-</body>
-</html>
+{% endblock %}
