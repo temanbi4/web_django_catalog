@@ -1,0 +1,25 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}
+{% if not post %}
+Создать блоговую запись
+{% else %}
+Редактировать блоговую запись - {{ post.title }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>
+    {% if not post %}
+    Создать блоговую запись
+    {% else %}
+    Редактировать блоговую запись - {{ post.title }}
+    {% endif %}
+</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+<a href="{% url 'blog:blog_post_list' %}">Назад к списку</a>
+{% endblock %}

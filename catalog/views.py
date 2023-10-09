@@ -1,26 +1,31 @@
-from django.shortcuts import render
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views import View
 from .models import Product
 
-# Create your views here.
-def index(request):
-    products = Product.objects.all()
-    context = {
-        'products': products,
-    }
-    return render(request, 'catalog/index.html', context)
+class IndexView(View):
+    template_name = 'catalog/index.html'
 
-def contact(request):
-    if request.method == 'POST':
+    def get(self, request):
+        products = Product.objects.all()
+        context = {'products': products}
+        return render(request, self.template_name, context)
+
+class ContactView(View):
+    template_name = 'catalog/contact.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
         print(name, email, message)
-    return render(request, 'catalog/contact.html')
+        return render(request, self.template_name)
 
+class ProductDetailView(View):
+    template_name = 'catalog/product_detail.html'
 
-def product_detail(request, product_id):
-    # Получаем информацию о товаре по его идентификатору
-    product = Product.objects.get(pk=product_id)
-
-    return render(request, 'catalog/product_detail.html', {'product': product})
+    def get(self, request, product_id):
+        product = get_object_or_404(Product, pk=product_id)
+        return render(request, self.template_name, {'product': product})
