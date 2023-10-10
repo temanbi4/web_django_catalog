@@ -1,0 +1,26 @@
+{% extends "catalog/base.html" %}
+{% block content %}
+    <a type="button" href="{% url 'blog:blogpost_create' %}" class="btn btn-outline-primary">Создать новую запись</a>
+    <div class="row text-left">
+        {% for object in object_list %}
+            {% if object.is_published %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if object.image %}
+                            <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object }}</h5>
+                            <p class="card-text">Просмотры: {{ object.views_counter }}</p>
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'blog:blogpost_detail' object.slug %}" class="btn btn-outline-secondary">Посмотреть</a>
+                                <a href="{% url 'blog:blogpost_edit' object.slug %}" class="btn btn-outline-secondary">Редактировать</a>
+                                <a href="{% url 'blog:blogpost_delete' object.slug %}" class="btn btn-outline-danger">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
