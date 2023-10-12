@@ -1,9 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-from django.db import models
-
 class Category(models.Model):
     name_category = models.CharField(max_length=100)
     description = models.TextField()
@@ -31,3 +27,17 @@ class Product(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
         ordering = ('name_product',)
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='товар')
+
+    version_number = models.IntegerField(default=1, verbose_name='номер версии')
+    version_name = models.CharField(max_length=150, verbose_name='название версии')
+    is_active = models.BooleanField(default=True, verbose_name='активная версия')
+
+    def __str__(self):
+        return f'{self.product} (ver. {self.version_number})'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'

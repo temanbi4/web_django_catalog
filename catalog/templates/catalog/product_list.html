@@ -1,0 +1,36 @@
+{% extends "catalog/base.html" %}
+{% load mediapath %}
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="col mb-3">
+    <a href="{% url 'catalog:product_create' %}" type="button" class="btn btn-primary">Создать новый
+        продукт</a>
+</div>
+<div class="container">
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if object.image %}
+                        <img src="{% mediapath object.image %}" alt="{{ object.name_product }}" class="img-thumbnail">
+                    {% else %}
+                        <img src="{% mediapath 'no_foto.jpg' %}" alt="No Photo" class="img-thumbnail">
+                    {% endif %}
+                    <h1 class="card-title pricing-card-title">{{ object.purchase_price }} ₽</h1>
+                    <p class="text-center">{{ object.description | truncatechars:100 }}</p>
+                    <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product' object.pk %}">Посмотреть</a>
+                    <a class="p-2 btn btn-outline-primary btn-sm"
+                       href="{% url 'catalog:product_edit' object.pk %}">Изменить</a>
+                    <a class="p-2 btn btn-outline-danger btn-sm"
+                       href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
