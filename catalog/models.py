@@ -1,5 +1,6 @@
 from django.db import models
 
+NULLABLE = {'blank': True, 'null': True}
 class Category(models.Model):
     name_category = models.CharField(max_length=100)
     description = models.TextField()
